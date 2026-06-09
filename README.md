@@ -36,3 +36,7 @@ A modern, dynamic portfolio website built with Laravel 13, Livewire 4, and Flux 
 ```bash
 git clone https://github.com/jony741/dynamic-portfolio.git
 cd dynamic-portfolio
+
+## 🌐 Live Demo
+
+**View the live portfolio:** [https://khurshid.ki-lagbebd.com/](https://khurshid.ki-lagbebd.com/)
