@@ -30,6 +30,13 @@ A modern, dynamic portfolio website built with Laravel 13, Livewire 4, and Flux 
 - MySQL (or any supported database)
 - Laravel 13 requirements
 
+
+## 🌐 Live Demo
+
+[![Live Demo](https://img.shields.io/badge/demo-online-brightgreen)](https://khurshid.ki-lagbebd.com/)
+
+**View the live portfolio:** [khurshid.ki-lagbebd.com](https://khurshid.ki-lagbebd.com/)
+
 ## 🚀 Installation
 
 ### Step 1: Clone the Repository
@@ -37,6 +44,3 @@ A modern, dynamic portfolio website built with Laravel 13, Livewire 4, and Flux 
 git clone https://github.com/jony741/dynamic-portfolio.git
 cd dynamic-portfolio
 
-## 🌐 Live Demo
-
-**View the live portfolio:** [https://khurshid.ki-lagbebd.com/](https://khurshid.ki-lagbebd.com/)
