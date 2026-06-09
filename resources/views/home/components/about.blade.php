@@ -26,7 +26,7 @@
         </div>
 
         <div class="max-w-3xl mx-auto text-left relative border-l border-slate-700/50 ml-4 md:mx-auto pl-8">
-            @forelse($experiences as $experience)
+            @forelse($experiences as $index => $experience)
                 <div class="mb-10 relative group last:mb-0">
                     <span class="absolute flex h-4 w-4 rounded-full bg-slate-900 border-2 border-cyan-500 -left-[41px] top-1.5 transition-all duration-500 group-hover:bg-cyan-500 shadow-[0_0_15px_rgba(6,182,212,0.3)]"></span>
                     <div class="flex flex-col gap-2">
@@ -57,11 +57,26 @@
                                 </p>
                             @endif
 
-                            {{-- Responsibility / Insight Button --}}
-                            <button class="insight-btn mt-4 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-cyan-500 hover:text-cyan-400 transition-colors"
-                                    data-insight="{{ $experience->responsibility }}">
-                                <i class="fa-solid fa-plus"></i> Read Insight
+                            {{-- Expand/Collapse Button --}}
+                            <button class="expand-btn mt-4 flex items-center gap-2 text-xs font-black uppercase tracking-widest text-cyan-500 hover:text-cyan-400 transition-colors"
+                                    data-expand="false"
+                                    data-target="insight-{{ $index }}">
+                                <i class="fa-solid fa-plus expand-icon"></i>
+                                Read Insight
                             </button>
+
+                            {{-- Expandable Content (Hidden by default) --}}
+                            <div id="insight-{{ $index }}"
+                                 class="insight-content hidden mt-4 pt-4 border-t border-slate-600/50 transition-all duration-300">
+                                <div class="flex gap-3">
+                                    <div class="w-1 bg-gradient-to-b from-cyan-500 to-cyan-500/20 rounded-full"></div>
+                                    <div class="flex-1">
+                                        <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+                                            {{ $experience->responsibility }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
 
                             {{-- Current Position Badge --}}
                             @if($experience->is_current)
@@ -83,3 +98,91 @@
         </div>
     </div>
 </section>
+
+{{-- JavaScript for Expand/Collapse Functionality --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all expand buttons
+        const expandButtons = document.querySelectorAll('.expand-btn');
+
+        expandButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Get the target content ID
+                const targetId = this.getAttribute('data-target');
+                const targetContent = document.getElementById(targetId);
+                const icon = this.querySelector('.expand-icon');
+                const isExpanded = this.getAttribute('data-expand') === 'true';
+
+                // Close all other expanded sections (optional - for accordion behavior)
+                // Uncomment the following lines if you want only one section open at a time
+                /*
+                expandButtons.forEach(btn => {
+                    if (btn !== this) {
+                        const otherTargetId = btn.getAttribute('data-target');
+                        const otherContent = document.getElementById(otherTargetId);
+                        const otherIcon = btn.querySelector('.expand-icon');
+                        btn.setAttribute('data-expand', 'false');
+                        otherContent.classList.add('hidden');
+                        otherIcon.classList.remove('fa-minus');
+                        otherIcon.classList.add('fa-plus');
+                    }
+                });
+                */
+
+                // Toggle the current section
+                if (isExpanded) {
+                    // Collapse
+                    targetContent.classList.add('hidden');
+                    this.setAttribute('data-expand', 'false');
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+
+                    // Optional: Change button text
+                    // this.innerHTML = '<i class="fa-solid fa-plus expand-icon"></i> Read Insight';
+                } else {
+                    // Expand
+                    targetContent.classList.remove('hidden');
+                    this.setAttribute('data-expand', 'true');
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+
+                    // Optional: Change button text
+                    // this.innerHTML = '<i class="fa-solid fa-minus expand-icon"></i> Hide Insight';
+
+                    // Smooth scroll to the expanded content (optional)
+                    targetContent.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'nearest'
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+{{-- Optional: Add CSS animations for smooth expand/collapse --}}
+<style>
+    .insight-content {
+        animation: fadeInUp 0.3s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Smooth transition for the button icon */
+    .expand-icon {
+        transition: transform 0.2s ease;
+    }
+
+    .expand-btn:hover .expand-icon {
+        transform: scale(1.1);
+    }
+</style>

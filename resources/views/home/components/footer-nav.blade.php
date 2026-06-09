@@ -4,7 +4,7 @@
             @php
                 $navItems = [
                     ['id' => 'home', 'icon' => 'fa-solid fa-house', 'label' => 'Home', 'showText' => false],
-                    ['id' => 'about', 'icon' => 'fa-solid fa-info-circle', 'label' => 'About', 'showText' => true],
+                    ['id' => 'about', 'icon' => 'fa-solid fa-info-circle', 'label' => 'About', 'showText' => false],
                     ['id' => 'projects', 'icon' => 'fa-solid fa-folder-open', 'label' => 'Projects', 'showText' => false],
                     ['id' => 'skills', 'icon' => 'fa-solid fa-bullseye', 'label' => 'Skills', 'showText' => false],
                     ['id' => 'contact', 'icon' => 'fa-regular fa-address-card', 'label' => 'Contact', 'showText' => false],
