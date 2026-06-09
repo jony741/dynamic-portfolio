@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('avatar_url')->nullable();
             $table->string('portfolio_github_folder_link')->nullable();
             $table->string('linked_link')->nullable();
+            $table->string('email')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

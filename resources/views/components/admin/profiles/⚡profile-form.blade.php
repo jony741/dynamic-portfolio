@@ -16,6 +16,7 @@ new #[Title('Portfolio Profile')] class extends Component {
     public string $avatar_url = '';
     public string $portfolio_github_folder_link = '';
     public string $linked_link = '';
+    public string $email = '';
     public bool $is_active = true;
     public $newAvatar = null;
     public ?Profile $profile = null;
@@ -32,6 +33,7 @@ new #[Title('Portfolio Profile')] class extends Component {
             $this->avatar_url         = $this->profile->avatar_url ?? '';
             $this->portfolio_github_folder_link         = $this->profile->portfolio_github_folder_link ?? '';
             $this->linked_link         = $this->profile->linked_link ?? '';
+            $this->email         = $this->profile->email ?? '';
             $this->is_active          = $this->profile->is_active;
         }
     }
@@ -39,6 +41,7 @@ new #[Title('Portfolio Profile')] class extends Component {
     public function saveProfile(): void
     {
         $this->validate([
+            'email'              => 'nullable|email',
             'full_name'          => 'required|string|max:255',
             'designation'        => 'required|string|max:255',
             'short_description'  => 'nullable|string',
@@ -54,6 +57,7 @@ new #[Title('Portfolio Profile')] class extends Component {
         }
 
         $data = [
+            'email'          => $this->email,
             'full_name'          => $this->full_name,
             'designation'        => $this->designation,
             'short_description'  => $this->short_description,
@@ -161,6 +165,15 @@ new #[Title('Portfolio Profile')] class extends Component {
                     type="text"
                     required
                     placeholder="e.g. Linked In Link"
+            />
+
+            {{--Email ---}}
+            <flux:input
+                    wire:model="email"
+                    :label="__('Email')"
+                    type="email"
+                    required
+                    placeholder="e.g. khurshid@gmail.com"
             />
 
             {{-- Is Active --}}

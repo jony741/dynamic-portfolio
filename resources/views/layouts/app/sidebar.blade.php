@@ -14,16 +14,16 @@
                 <flux:sidebar.group :heading="__('Portfolio')" class="grid">
 
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
-                        {{ __('Dashboard') }}
-                    </flux:sidebar.item>
-
-                    <flux:sidebar.item
-                            icon="user-circle"
-                            :href="route('admin.profiles.index')"
-                            :current="request()->routeIs('admin.profiles.*')"
-                            wire:navigate>
                         {{ __('Profile') }}
                     </flux:sidebar.item>
+
+{{--                    <flux:sidebar.item--}}
+{{--                            icon="user-circle"--}}
+{{--                            :href="route('admin.profiles.index')"--}}
+{{--                            :current="request()->routeIs('admin.profiles.*')"--}}
+{{--                            wire:navigate>--}}
+{{--                        {{ __('Profile') }}--}}
+{{--                    </flux:sidebar.item>--}}
 
                     <flux:sidebar.item
                             icon="briefcase"
@@ -57,13 +57,6 @@
                         {{ __('Tech Stack') }}
                     </flux:sidebar.item>
 
-                    <flux:sidebar.item
-                            icon="at-symbol"
-                            :href="route('admin.contact-info.index')"
-                            :current="request()->routeIs('admin.contact-info.*')"
-                            wire:navigate>
-                        {{ __('Contact Info') }}
-                    </flux:sidebar.item>
                 </flux:sidebar.group>
 
                 </flux:sidebar.nav>

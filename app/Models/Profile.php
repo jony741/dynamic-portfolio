@@ -15,6 +15,7 @@ class Profile extends Model
         'avatar_url',
         'portfolio_github_folder_link',
         'linked_link',
+        'email',
         'is_active',
     ];
 
