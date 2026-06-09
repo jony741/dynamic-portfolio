@@ -21,4 +21,10 @@ class Profile extends Model
     protected $casts = [
         'is_active' => 'boolean',
     ];
+
+    // Get active profile
+    public static function getActive()
+    {
+        return self::where('is_active', true)->first();
+    }
 }

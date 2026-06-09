@@ -7,7 +7,7 @@
     <meta name="description" content="Khurshid Alam - Full Stack AI Developer Portfolio">
     <meta name="author" content="Khurshid Alam">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Khurshid Alam | Full Stack AI Developer')</title>
+    <title>{{ $profile->full_name ?? 'Khurshid Alam' }} | {{ $profile->designation ?? 'Full Stack AI Developer' }}</title>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>

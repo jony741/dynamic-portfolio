@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class StackItem extends Model
 {
-
     use HasFactory;
 
     protected $fillable = [
@@ -17,10 +16,19 @@ class StackItem extends Model
         'sort_order',
     ];
 
+    protected $casts = [
+        'proficiency_level' => 'integer',
+    ];
+
+    // Relationship with Profile
+    public function profile()
+    {
+        return $this->belongsTo(Profile::class);
+    }
+
+    // Relationship with Technology
     public function technology()
     {
         return $this->belongsTo(Technology::class);
     }
-
-
 }

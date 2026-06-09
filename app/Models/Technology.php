@@ -16,5 +16,17 @@ class Technology extends Model
         'color_hex',
     ];
 
+    // Relationship with Projects
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_technologies');
+    }
+
+    // Relationship with Stack Items
+    public function stackItems()
+    {
+        return $this->hasMany(StackItem::class);
+    }
+
 
 }

@@ -1,29 +1,23 @@
 <?php
 
-use App\Http\Controllers\ContactInfoController;
-use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\StackItemController;
-use App\Http\Controllers\TechnologyController;
 use Illuminate\Support\Facades\Route;
 
-//Route::view('/', 'welcome')->name('home');
-//Route::get('/', \App\Pages\Home::class)->name('home');
-Route::get('/', function () {
-    return view('home');
-});
-//Route::get('/', function () {
+// Route::view('/', 'welcome')->name('home');
+// Route::get('/', \App\Pages\Home::class)->name('home');
+Route::get('/', [ProfileController::class, 'index']);
+
+// Route::get('/', function () {
 //    $profile     = \App\Models\Profile::where('is_active', true)->first();
 //    $experiences = \App\Models\Experience::where('profile_id', $profile?->id)->orderBy('sort_order')->get();
 //    $allProjects    = \App\Models\Project::where('profile_id', $profile?->id)->with('technologies')->orderBy('sort_order')->get();
 //    $stackItems  = \App\Models\StackItem::where('profile_id', $profile?->id)->with('technology')->orderBy('sort_order')->get()->groupBy('technology.category');
 //    $contactInfo = \App\Models\ContactInfo::where('profile_id', $profile?->id)->where('is_visible', true)->orderBy('sort_order')->get();
 //
-////    dd($profile->full_name);
+// //    dd($profile->full_name);
 //
 //    return view('home', compact('profile', 'experiences', 'allProjects', 'stackItems', 'contactInfo'));
-//})->name('home');
+// })->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('dashboard', 'dashboard')->name('dashboard');
