@@ -14,6 +14,8 @@ new #[Title('Portfolio Profile')] class extends Component {
     public string $short_description = '';
     public string $experience_summary = '';
     public string $avatar_url = '';
+    public string $portfolio_github_folder_link = '';
+    public string $linked_link = '';
     public bool $is_active = true;
     public $newAvatar = null;
     public ?Profile $profile = null;
@@ -28,6 +30,8 @@ new #[Title('Portfolio Profile')] class extends Component {
             $this->short_description  = $this->profile->short_description ?? '';
             $this->experience_summary = $this->profile->experience_summary ?? '';
             $this->avatar_url         = $this->profile->avatar_url ?? '';
+            $this->portfolio_github_folder_link         = $this->profile->portfolio_github_folder_link ?? '';
+            $this->linked_link         = $this->profile->linked_link ?? '';
             $this->is_active          = $this->profile->is_active;
         }
     }
@@ -55,6 +59,8 @@ new #[Title('Portfolio Profile')] class extends Component {
             'short_description'  => $this->short_description,
             'experience_summary' => $this->experience_summary,
             'avatar_url'         => $avatarPath,
+            'portfolio_github_folder_link'         => $this->portfolio_github_folder_link,
+            'linked_link'         => $this->linked_link,
             'is_active'          => $this->is_active,
         ];
 
@@ -137,6 +143,24 @@ new #[Title('Portfolio Profile')] class extends Component {
                     :label="__('Experience Summary')"
                     placeholder="Overall summary of your professional experience..."
                     rows="5"
+            />
+
+            {{-- Github Folder link --}}
+            <flux:input
+                    wire:model="portfolio_github_folder_link"
+                    :label="__('Portfolio Github Repo')"
+                    type="text"
+                    required
+                    placeholder="e.g. Portfolio github repo"
+            />
+
+            {{-- Github Folder link --}}
+            <flux:input
+                    wire:model="linked_link"
+                    :label="__('Linked In Link')"
+                    type="text"
+                    required
+                    placeholder="e.g. Linked In Link"
             />
 
             {{-- Is Active --}}

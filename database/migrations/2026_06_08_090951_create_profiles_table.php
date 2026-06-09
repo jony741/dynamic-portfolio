@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('short_description')->nullable();
             $table->text('experience_summary')->nullable();
             $table->string('avatar_url')->nullable();
+            $table->string('portfolio_github_folder_link')->nullable();
+            $table->string('linked_link')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

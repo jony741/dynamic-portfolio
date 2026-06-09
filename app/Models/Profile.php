@@ -13,6 +13,8 @@ class Profile extends Model
         'short_description',
         'experience_summary',
         'avatar_url',
+        'portfolio_github_folder_link',
+        'linked_link',
         'is_active',
     ];
 
