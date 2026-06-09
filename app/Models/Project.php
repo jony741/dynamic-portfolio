@@ -16,6 +16,7 @@ class Project extends Model
         'profile_id',
         'name',
         'description',
+        'category',
         'live_url',
         'repo_url',
         'thumbnail_url',

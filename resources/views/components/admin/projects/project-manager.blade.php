@@ -18,10 +18,12 @@ new #[Title('Projects')] class extends Component {
     // form fields
     public string $name = '';
     public string $description = '';
+    public string $category = '';
     public string $live_url = '';
     public string $repo_url = '';
     public string $thumbnail_url = '';
     public bool $is_featured = false;
+
     public int $sort_order = 0;
     public $newThumbnail = null;
 
@@ -39,6 +41,14 @@ new #[Title('Projects')] class extends Component {
         $this->profileId = $profile->id;
     }
 
+    // available categories
+    public array $categories = [
+        'AI',
+        'FINTECH',
+        'HEALTHCARE',
+        'ENTERPRISE'
+    ];
+
     public function create(): void
     {
         $this->resetForm();
@@ -53,6 +63,7 @@ new #[Title('Projects')] class extends Component {
         $this->editingId      = $item->id;
         $this->name           = $item->name;
         $this->description    = $item->description;
+        $this->category       = $item->category ?? '';
         $this->live_url       = $item->live_url ?? '';
         $this->repo_url       = $item->repo_url ?? '';
         $this->thumbnail_url  = $item->thumbnail_url ?? '';
@@ -73,6 +84,7 @@ new #[Title('Projects')] class extends Component {
         $this->validate([
             'name'                 => 'required|string|max:255',
             'description'          => 'required|string',
+            'category'             => 'required|string',
             'live_url'             => 'nullable|url|max:255',
             'repo_url'             => 'nullable|url|max:255',
             'is_featured'          => 'boolean',
@@ -93,6 +105,7 @@ new #[Title('Projects')] class extends Component {
             'profile_id'    => $this->profileId,
             'name'          => $this->name,
             'description'   => $this->description,
+            'category'      => $this->category,
             'live_url'      => $this->live_url,
             'repo_url'      => $this->repo_url,
             'thumbnail_url' => $thumbnailPath,
@@ -139,6 +152,7 @@ new #[Title('Projects')] class extends Component {
     {
         $this->name                 = '';
         $this->description          = '';
+        $this->category          = '';
         $this->live_url             = '';
         $this->repo_url             = '';
         $this->thumbnail_url        = '';
@@ -209,6 +223,19 @@ new #[Title('Projects')] class extends Component {
                             rows="4"
                             required
                     />
+
+                    {{-- Category --}}
+                    <flux:select
+                            wire:model="category"
+                            :label="__('Category')"
+                            placeholder="{{ __('Select a category') }}"
+                    >
+                        @foreach($categories as $cat)
+                            <flux:select.option value="{{ $cat }}">
+                                {{ ucfirst($cat) }}
+                            </flux:select.option>
+                        @endforeach
+                    </flux:select>
 
                     <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
 
@@ -343,6 +370,7 @@ new #[Title('Projects')] class extends Component {
                     <th class="px-4 py-3 text-left">{{ __('Thumbnail') }}</th>
                     <th class="px-4 py-3 text-left">{{ __('Name') }}</th>
                     <th class="px-4 py-3 text-left">{{ __('Technologies') }}</th>
+                    <th class="px-4 py-3 text-left">{{ __('Category') }}</th>
                     <th class="px-4 py-3 text-left">{{ __('Links') }}</th>
                     <th class="px-4 py-3 text-left">{{ __('Featured') }}</th>
                     <th class="px-4 py-3 text-left">{{ __('Order') }}</th>
@@ -380,6 +408,16 @@ new #[Title('Projects')] class extends Component {
                                             </span>
                                     @endforeach
                                 </div>
+                            @else
+                                <span class="text-zinc-400">—</span>
+                            @endif
+                        </td>
+
+                        <td class="px-4 py-3">
+                            @if($item->category)
+                                <span class="px-2 py-1 text-xs rounded bg-yellow-100 text-yellow-700 dark:bg-yellow-900 dark:text-yellow-300">
+                                        {{ $item->category }}
+                                    </span>
                             @else
                                 <span class="text-zinc-400">—</span>
                             @endif

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('profile_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->text('description');
+            $table->string('category');
             $table->string('live_url')->nullable();
             $table->string('repo_url')->nullable();
             $table->string('thumbnail_url')->nullable();
