@@ -9,4 +9,12 @@ class ProjectTechnology extends Model
 {
     /** @use HasFactory<\Database\Factories\ProjectTechnologyFactory> */
     use HasFactory;
+
+    public $timestamps = false;
+
+    protected $fillable = [
+        'project_id',
+        'technology_id',
+        'sort_order',
+    ];
 }

@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Technology extends Model
 {
-    /** @use HasFactory<\Database\Factories\TechnologyFactory> */
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'icon_slug',
+        'category',
+        'color_hex',
+    ];
+
+
 }

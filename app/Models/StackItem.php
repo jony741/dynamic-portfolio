@@ -7,6 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class StackItem extends Model
 {
-    /** @use HasFactory<\Database\Factories\StackItemFactory> */
+
     use HasFactory;
+
+    protected $fillable = [
+        'profile_id',
+        'technology_id',
+        'proficiency_level',
+        'sort_order',
+    ];
+
+    public function technology()
+    {
+        return $this->belongsTo(Technology::class);
+    }
+
+
 }
