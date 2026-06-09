@@ -49,7 +49,7 @@
             <div class="absolute -top-3 -left-3 w-10 h-10 border-t-2 border-l-2 border-cyan-500/60 z-20 transition-transform group-hover:rotate-12"></div>
             <div class="absolute -bottom-3 -right-3 w-10 h-10 border-b-2 border-r-2 border-cyan-500/60 z-20 transition-transform group-hover:-rotate-12"></div>
             <div class="relative w-[300px] md:w-[340px] lg:w-[380px] aspect-square rounded-3xl overflow-hidden border border-slate-700/50 shadow-2xl bg-slate-950">
-                <img src="{{ asset('assets/me.jpeg') }}" alt="{{ $profile->full_name }}" class="w-full h-full object-cover scale-105 group-hover:scale-100 grayscale group-hover:grayscale-0 transition-all duration-700" onerror="this.src='https://via.placeholder.com/400?text={{ urlencode($profile->full_name) }}'">
+                <img src="{{ asset('storage/' . $profile->avatar_url) }}" alt="{{ $profile->full_name }}" class="w-full h-full object-cover scale-105 group-hover:scale-100 grayscale group-hover:grayscale-0 transition-all duration-700" onerror="this.src='https://via.placeholder.com/400?text={{ urlencode($profile->full_name) }}'">
                 <div class="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-slate-900/30 group-hover:via-transparent transition-all duration-700"></div>
                 <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-transparent h-[3px] w-full -translate-y-full group-hover:animate-scan pointer-events-none"></div>
             </div>

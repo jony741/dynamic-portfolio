@@ -13,6 +13,7 @@ new #[Title('Technologies')] class extends Component {
     public string $name = '';
     public string $icon_slug = '';
     public string $category = '';
+    public string $icon_link = '';
     public string $color_hex = '#000000';
 
     // state
@@ -52,6 +53,7 @@ new #[Title('Technologies')] class extends Component {
         $this->icon_slug  = $technology->icon_slug ?? '';
         $this->category   = $technology->category ?? '';
         $this->color_hex  = $technology->color_hex ?? '#000000';
+        $this->icon_link  = $technology->icon_link  ?? '';
         $this->showForm   = true;
     }
 
@@ -72,6 +74,7 @@ new #[Title('Technologies')] class extends Component {
             'icon_slug' => $this->icon_slug,
             'category'  => $this->category,
             'color_hex' => $this->color_hex,
+            'icon_link' => $this->icon_link,
         ];
 
         if ($this->editingId) {
@@ -113,6 +116,7 @@ new #[Title('Technologies')] class extends Component {
         $this->icon_slug = '';
         $this->category  = '';
         $this->color_hex = '#000000';
+        $this->icon_link = '';
         $this->editingId = null;
     }
 
@@ -183,6 +187,12 @@ new #[Title('Technologies')] class extends Component {
                             type="text"
                             placeholder="e.g. laravel, vuejs, mysql"
                     />
+                    <flux:input
+                            wire:model="icon_link"
+                            :label="__('Icon Link')"
+                            type="text"
+                            placeholder="e.g. Icon Link"
+                    />
                     <flux:description>
                         {{ __('Use devicon slug names. Browse at') }}
                         <a href="https://devicon.dev" target="_blank" class="underline">devicon.dev</a>
@@ -235,7 +245,7 @@ new #[Title('Technologies')] class extends Component {
                         {{ __('Category') }}
                     </th>
                     <th class="px-4 py-3 text-left font-medium text-zinc-600 dark:text-zinc-400">
-                        {{ __('Icon Slug') }}
+                        {{ __('Icon Link') }}
                     </th>
                     <th class="px-4 py-3 text-left font-medium text-zinc-600 dark:text-zinc-400">
                         {{ __('Color') }}
@@ -261,7 +271,7 @@ new #[Title('Technologies')] class extends Component {
                             @endif
                         </td>
                         <td class="px-4 py-3 text-zinc-600 dark:text-zinc-400">
-                            {{ $technology->icon_slug ?? '—' }}
+                            {{ $technology->icon_link ?? '—' }}
                         </td>
                         <td class="px-4 py-3">
                             @if($technology->color_hex)

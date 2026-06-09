@@ -14,6 +14,7 @@ class Technology extends Model
         'icon_slug',
         'category',
         'color_hex',
+        'icon_link',
     ];
 
     // Relationship with Projects

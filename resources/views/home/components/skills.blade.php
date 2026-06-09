@@ -49,24 +49,45 @@
                                 @foreach($groupedItems[$category] as $item)
                                     <div class="group relative flex flex-col items-center gap-2 p-3 rounded-2xl border border-slate-700/50 bg-slate-800/30 hover:bg-slate-700/50 transition-all duration-300 hover:scale-105">
                                         <div class="relative">
-                                            @if($item->technology && $item->technology->icon_class)
+                                            {{-- Icon Display Logic --}}
+                                            @if($item->technology && $item->technology->icon_link)
+                                                {{-- Display icon from online URL --}}
+                                                <img src="{{ $item->technology->icon_link }}"
+                                                     alt="{{ $item->technology->name }}"
+                                                     class="w-10 h-10 object-contain transition-all duration-300 group-hover:scale-110"
+                                                     onerror="this.onerror=null; this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                                <div class="hidden">
+                                                    {{-- Fallback to icon_class if image fails to load --}}
+                                                    @if($item->technology->icon_class)
+                                                        <i class="{{ $item->technology->icon_class }} text-4xl transition-all duration-300 group-hover:scale-110"
+                                                           style="color: {{ $item->technology->color_code ?? '#94a3b8' }}"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-code text-4xl text-slate-400 group-hover:text-cyan-500 transition-all duration-300"></i>
+                                                    @endif
+                                                </div>
+                                            @elseif($item->technology && $item->technology->icon_class)
+                                                {{-- Display local icon class --}}
                                                 <i class="{{ $item->technology->icon_class }} text-4xl transition-all duration-300 group-hover:scale-110"
                                                    style="color: {{ $item->technology->color_code ?? '#94a3b8' }}"></i>
                                             @else
+                                                {{-- Default fallback icon --}}
                                                 <i class="fa-solid fa-code text-4xl text-slate-400 group-hover:text-cyan-500 transition-all duration-300"></i>
                                             @endif
 
-                                            <div class="absolute -top-1 -right-1 flex gap-0.5">
-                                                @for($i = 1; $i <= 5; $i++)
-                                                    <div class="w-1 h-1 rounded-full {{ $i <= $item->proficiency_level ? 'bg-cyan-500' : 'bg-slate-600' }}"></div>
-                                                @endfor
-                                            </div>
+                                            {{-- Proficiency Level Indicator (as dots) --}}
+{{--                                            <div class="absolute -top-1 -right-1 flex gap-0.5">--}}
+{{--                                                @for($i = 1; $i <= 5; $i++)--}}
+{{--                                                    <div class="w-1 h-1 rounded-full {{ $i <= $item->proficiency_level ? 'bg-cyan-500' : 'bg-slate-600' }}"></div>--}}
+{{--                                                @endfor--}}
+{{--                                            </div>--}}
                                         </div>
 
+                                        {{-- Technology Name --}}
                                         <span class="text-xs sm:text-sm font-bold text-slate-300 group-hover:text-slate-100 transition-colors text-center">
                                             {{ $item->technology ? $item->technology->name : 'Unknown' }}
                                         </span>
 
+                                        {{-- Proficiency Level Tooltip --}}
                                         <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 bg-slate-900 rounded text-[10px] font-bold text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-10 border border-cyan-500/30">
                                             {{ $item->proficiency_level }}/5 -
                                             @switch($item->proficiency_level)
